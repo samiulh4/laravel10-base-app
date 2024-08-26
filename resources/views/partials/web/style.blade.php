@@ -5,7 +5,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700;900&display=swap" />
 
 <!-- Icon Font Stylesheet -->
-<link rel="stylesheet" href="{{ asset('assets/web/lib/fontawesome/css/all.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/common/plugins/fontawesome/css/all.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/web/lib/bootstrap-icons/bootstrap-icons.css') }}" />
 
 <!-- Libraries Stylesheet -->
