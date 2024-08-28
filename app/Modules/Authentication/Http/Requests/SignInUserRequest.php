@@ -4,7 +4,7 @@ namespace App\Modules\Authentication\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SignUpUserRequest extends FormRequest
+class SignInUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,7 @@ class SignUpUserRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'email' => 'E-mail address',
-            'avatar' => 'Image',
-            'gender_code' => 'Gender',
+            'email' => 'E-mail address'
         ];
     }
 
@@ -36,11 +34,8 @@ class SignUpUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required"],
             "email" => ["required", "email:rfc,dns"],
-            "gender_code" => ["required"],
-            "password" => ["required"],
-            'avatar' => ['required','image','mimes:jpg,png,jpeg','max:1024']
+            "password" => ["required"]
         ];
     }
 
@@ -52,8 +47,8 @@ class SignUpUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Name is required',
             'email.required' => 'E-mail is required',
+            'password.required' => 'Password is required'
         ];
     }
 }

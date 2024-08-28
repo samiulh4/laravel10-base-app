@@ -4,15 +4,24 @@ namespace App\Modules\Authentication\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Modules\User\Models\Users;
 use App\Modules\Authentication\Http\Requests\SignUpUserRequest;
+use App\Modules\Authentication\Http\Requests\SignInUserRequest;
+use App\Modules\Authentication\Services\AuthenticationService;
+use Illuminate\Support\Facades\Redirect;
 
 class AuthenticationController extends Controller
 {
-    public function signIn()
+    
+    protected $authService;
+
+    public function __construct(AuthenticationService $authService)
+    {
+        $this->authService = $authService;
+    }
+    public function signInView()
     {
         return view("Authentication::pages.sign-in");
-    }// end -:- signIn()
+    }// end -:- signInView()
 
     public function signUpView()
     {
@@ -21,9 +30,32 @@ class AuthenticationController extends Controller
 
     public function signUpStore(SignUpUserRequest $request)
     {
-       
-        $validated = $request->validated();
+        $store =  $this->authService->signUpService($request);
+        
+        session()->flash($store['status'], $store['message']);
 
-        return redirect('/sign-in');
+        if($store['status'] == 'success'){
+            return redirect('/sign-in');
+        }
+        return redirect('/sign-up');
     }// end -:- signUpStore()
+
+    public function signInAccess(SignInUserRequest $request)
+    {
+        $auth =  $this->authService->signInService($request);
+
+        if($auth['status'] == 'success'){
+            return redirect('/admin');
+        }
+        return redirect('/sign-in');
+    }// end -:- signInAccess()
+
+    public function signOut()
+    {
+        $sign_out_status = $this->authService->signOutService();
+        if($sign_out_status == true){
+            return redirect('/sign-in');
+        }
+        return Redirect::back();
+    }// end -:- signOut()
 }// end -:- AuthenticationController
