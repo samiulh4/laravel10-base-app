@@ -4,8 +4,8 @@ namespace App\Modules\Authentication\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Modules\User\Models\Users;
 use App\Modules\Authentication\Http\Requests\SignUpUserRequest;
+use App\Modules\Authentication\Services\AuthenticationService;
 
 class AuthenticationController extends Controller
 {
@@ -21,9 +21,14 @@ class AuthenticationController extends Controller
 
     public function signUpStore(SignUpUserRequest $request)
     {
-       
-        $validated = $request->validated();
+        $authService = new AuthenticationService;
+        $store = $authService->signUpService($request);
+        
+        session()->flash($store['status'], $store['message']);
 
-        return redirect('/sign-in');
+        if($store['status'] == 'success'){
+            return redirect('/sign-in');
+        }
+        return redirect('/sign-up');
     }// end -:- signUpStore()
 }// end -:- AuthenticationController

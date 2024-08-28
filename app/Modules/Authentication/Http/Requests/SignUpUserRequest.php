@@ -24,6 +24,7 @@ class SignUpUserRequest extends FormRequest
         return [
             'email' => 'E-mail address',
             'avatar' => 'Image',
+            'gender_code' => 'Gender',
         ];
     }
 
@@ -37,7 +38,7 @@ class SignUpUserRequest extends FormRequest
         return [
             "name" => ["required"],
             "email" => ["required", "email:rfc,dns"],
-            "gender" => ["required"],
+            "gender_code" => ["required"],
             "password" => ["required"],
             'avatar' => ['required','image','mimes:jpg,png,jpeg','max:1024']
         ];

@@ -41,6 +41,7 @@
     </style>
     <section class="vh-100">
         <div class="container-fluid h-custom">
+            @include('Authentication::partials.message')
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5">
                     <img src="{{ asset('assets/authentication/img/draw2.webp') }}" class="img-fluid" alt="Sample image">
