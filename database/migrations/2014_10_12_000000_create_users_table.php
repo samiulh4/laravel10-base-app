@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('gender_code', ['male', 'female', 'other'])->nullable();
             $table->string('avatar', 255)->nullable();
             $table->enum('web_access', ['all', 'admin', 'web'])->default('web');
+            $table->tinyInteger('is_active')->default(0);
             $table->string('password', 255);
             $table->rememberToken();
             $table->bigInteger('created_by')->unsigned()->nullable();
