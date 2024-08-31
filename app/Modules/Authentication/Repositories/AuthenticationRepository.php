@@ -47,12 +47,4 @@ class AuthenticationRepository implements AuthenticationInterface
          }
     }// end -:- signInUser()
 
-    public function signOutUser()
-    {
-        Auth::logout(); // Logs out the user
-        request()->session()->invalidate(); // Invalidates the session
-        request()->session()->regenerateToken(); // Regenerates the CSRF token for security
-
-        return true;
-    }
 }// end -:- AuthenticationRepository

@@ -7,6 +7,8 @@ use Exception;
 use App\Modules\Authentication\Repositories\AuthenticationRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+
 
 class AuthenticationService
 {
@@ -100,6 +102,10 @@ class AuthenticationService
 
     public function signOutService()
     {
-        return $this->authRepository->signOutUser();
+        Auth::logout(); // Logs out the user
+        request()->session()->invalidate(); // Invalidates the session
+        request()->session()->regenerateToken(); // Regenerates the CSRF token for security
+
+        return true;
     }
 }// end -:- AuthenticationService
