@@ -186,6 +186,7 @@ return [
          * Package Service Providers...
          */
         Spatie\Html\HtmlServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -213,6 +214,7 @@ return [
          * Package Aliases...
          */
         'Html' => Spatie\Html\Facades\Html::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ])->toArray(),
 
 ];
