@@ -1,0 +1,1 @@
+@extends('LayoutAdmin::layouts.admin')
